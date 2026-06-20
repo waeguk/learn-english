@@ -1,41 +1,153 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>Learn English</title>
+<meta charset="UTF-8">
+<title>English Lesson Quiz</title>
+
+<style>
+body{
+    font-family: Arial, sans-serif;
+    max-width: 800px;
+    margin: 20px auto;
+    padding: 20px;
+}
+
+.question{
+    margin-bottom: 25px;
+    padding: 15px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+}
+
+button{
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+.correct{
+    color: green;
+    font-weight: bold;
+}
+
+.wrong{
+    color: red;
+    font-weight: bold;
+}
+
+#score{
+    margin-top:20px;
+    font-size:22px;
+    font-weight:bold;
+}
+</style>
 </head>
+
 <body>
 
-<h1>Welcome to Learn English</h1>
+<h1>English Lesson Quiz</h1>
 
-<p>What is the correct answer?</p>
+<div class="question">
+<h3>1. Pain is a _______ signal from our body.</h3>
+<label><input type="radio" name="q1" value="A"> A) warning</label><br>
+<label><input type="radio" name="q1" value="B"> B) sleeping</label><br>
+<label><input type="radio" name="q1" value="C"> C) cooking</label><br>
+<label><input type="radio" name="q1" value="D"> D) driving</label>
+<p id="r1"></p>
+</div>
 
-<input type="radio" name="q1" value="A"> A<br>
-<input type="radio" name="q1" value="B"> B<br>
-<input type="radio" name="q1" value="C"> C<br><br>
+<div class="question">
+<h3>2. When we touch something hot, we quickly pull our _______ away.</h3>
+<label><input type="radio" name="q2" value="A"> A) foot</label><br>
+<label><input type="radio" name="q2" value="B"> B) hand</label><br>
+<label><input type="radio" name="q2" value="C"> C) ear</label><br>
+<label><input type="radio" name="q2" value="D"> D) eye</label>
+<p id="r2"></p>
+</div>
 
-<button onclick="checkAnswer()">Check Answer</button>
+<div class="question">
+<h3>3. Pain can help us prevent more serious _______.</h3>
+<label><input type="radio" name="q3" value="A"> A) games</label><br>
+<label><input type="radio" name="q3" value="B"> B) lessons</label><br>
+<label><input type="radio" name="q3" value="C"> C) injuries</label><br>
+<label><input type="radio" name="q3" value="D"> D) meals</label>
+<p id="r3"></p>
+</div>
 
-<p id="result"></p>
+<div class="question">
+<h3>4. If pain lasts for a long time, we should see a _______.</h3>
+<label><input type="radio" name="q4" value="A"> A) teacher</label><br>
+<label><input type="radio" name="q4" value="B"> B) friend</label><br>
+<label><input type="radio" name="q4" value="C"> C) doctor</label><br>
+<label><input type="radio" name="q4" value="D"> D) driver</label>
+<p id="r4"></p>
+</div>
+
+<div class="question">
+<h3>5. Pain is an important _______ from our body.</h3>
+<label><input type="radio" name="q5" value="A"> A) message</label><br>
+<label><input type="radio" name="q5" value="B"> B) picture</label><br>
+<label><input type="radio" name="q5" value="C"> C) color</label><br>
+<label><input type="radio" name="q5" value="D"> D) song</label>
+<p id="r5"></p>
+</div>
+
+<button onclick="checkAnswers()">Check Answers</button>
+
+<div id="score"></div>
 
 <script>
-function checkAnswer() {
-  let answer =
-  document.querySelector('input[name="q1"]:checked');
 
-  if (!answer) {
-    document.getElementById("result").innerHTML =
-    "Please select an answer.";
-    return;
-  }
+function checkAnswers(){
 
-  if (answer.value === "B") {
-    document.getElementById("result").innerHTML =
-    "✅ Correct!";
-  } else {
-    document.getElementById("result").innerHTML =
-    "❌ Wrong!";
-  }
+let answers = {
+q1:"A",
+q2:"B",
+q3:"C",
+q4:"C",
+q5:"A"
+};
+
+let score = 0;
+
+for(let i=1;i<=5;i++){
+
+let selected =
+document.querySelector('input[name="q'+i+'"]:checked');
+
+let result =
+document.getElementById('r'+i);
+
+if(selected){
+
+if(selected.value===answers['q'+i]){
+
+score++;
+
+result.innerHTML="✅ Correct";
+result.className="correct";
+
+}else{
+
+result.innerHTML=
+"❌ Incorrect";
+result.className="wrong";
 }
+
+}else{
+
+result.innerHTML=
+"⚠ Please select an answer";
+result.className="wrong";
+}
+
+}
+
+document.getElementById("score").innerHTML =
+"Your Score: " + score + " / 5";
+
+}
+
 </script>
 
 </body>
